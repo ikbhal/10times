@@ -4,6 +4,7 @@ import {useState} from 'react';
 //https://www.npmjs.com/package/react-json-pretty
 import JSONPretty from 'react-json-pretty';
 import JSONPrettyMon from 'react-json-pretty/dist/monikai';
+import { JsonToTable } from 'react-json-to-table';
 //import 'react-json-pretty/themes/monikai.css';
 
 function readableDays(days){
@@ -112,11 +113,20 @@ function App() {
       <p>How much money you have for sadkah initial ? 
         <input type="number" value={initialSadkah} onchange={e=>setInitialSadkah(e.target.value)}/> <br/>
       </p>
-      <p>How many days you have to wait? {JSON.stringify(getWaitingDays(moneyNeeded, initialSadkah, returnMultiplier, returnInDays))}</p>
+      <p>How many days you have to wait?</p>
+      
+      <hr/>
+      <p>JSON Table</p>
+      <JsonToTable json={getWaitingDays(moneyNeeded, initialSadkah, returnMultiplier, returnInDays)} />
+
       <hr/>
       <JSONPretty 
         data={getWaitingDays(moneyNeeded, initialSadkah, returnMultiplier, returnInDays)} 
         theme={JSONPrettyMon}></JSONPretty>
+
+      <hr/>
+      <p>JSON: {JSON.stringify(getWaitingDays(moneyNeeded, initialSadkah, returnMultiplier, returnInDays))}</p>
+
     </div>
   );
 }
